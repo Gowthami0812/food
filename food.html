@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickBite — Food Delivery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+
+    <div class="logo">
+      <span class="logo-icon">🍴</span>
+      <span>Quick<span>Bite</span></span>
+    </div>
+
+    <div class="location">
+      <span>📍</span>
+      <div>
+        <small>Deliver to</small>
+        <strong>Coimbatore</strong>
+      </div>
+      <span>⌄</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#menu">Menu</a>
+      <a href="#offers">Offers</a>
+    </div>
+
+    <button class="login-btn" onclick="showToast('Login feature coming soon!')">
+      Login
+    </button>
+
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒
+      <span id="cartCount">0</span>
+    </button>
+
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="container hero-inner">
+
+    <div class="hero-copy">
+
+      <span class="eyebrow">
+        FAST • FRESH • AT YOUR DOOR
+      </span>
+
+      <h1>
+        Craving something
+        <br>
+        <span>delicious?</span>
+      </h1>
+
+      <p>
+        Discover restaurants, hotels and your favourite food
+        around you and get them delivered hot and fresh.
+      </p>
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search restaurants, hotels, dishes or cuisines..."
+          oninput="globalSearch()"
+        >
+
+        <button onclick="globalSearch()">
+          Search
+        </button>
+
+      </div>
+
+      <div class="search-hints">
+        Try:
+        <button onclick="quickSearch('biryani')">Biryani</button>
+        <button onclick="quickSearch('pizza')">Pizza</button>
+        <button onclick="quickSearch('hotel')">Hotels</button>
+        <button onclick="quickSearch('burger')">Burger</button>
+      </div>
+
+    </div>
+
+    <div class="hero-food">
+
+      <div class="hero-circle">
+        🍛
+      </div>
+
+      <div class="floating-card card-one">
+        ⭐ 4.8
+        <small>Top Rated</small>
+      </div>
+
+      <div class="floating-card card-two">
+        ⚡ 25 min
+        <small>Fast Delivery</small>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="container content">
+
+  <section
+    class="search-results-section"
+    id="searchResultsSection"
+  >
+
+    <div class="section-head">
+
+      <div>
+        <p class="section-kicker">
+          SEARCH RESULTS
+        </p>
+
+        <h2 id="searchResultTitle">
+          Restaurants & Hotels
+        </h2>
+      </div>
+
+      <button
+        class="clear-search"
+        onclick="clearSearch()"
+      >
+        Clear Search
+      </button>
+
+    </div>
+
+    <div class="search-filters">
+
+      <button
+        class="search-filter active"
+        onclick="setSearchFilter('All')"
+        data-filter="All"
+      >
+        All
+      </button>
+
+      <button
+        class="search-filter"
+        onclick="setSearchFilter('Restaurant')"
+        data-filter="Restaurant"
+      >
+        🍽 Restaurants
+      </button>
+
+      <button
+        class="search-filter"
+        onclick="setSearchFilter('Hotel')"
+        data-filter="Hotel"
+      >
+        🏨 Hotels
+      </button>
+
+      <button
+        class="search-filter"
+        onclick="setSearchFilter('Food')"
+        data-filter="Food"
+      >
+        🍔 Food
+      </button>
+
+    </div>
+
+    <div
+      class="places-grid"
+      id="placesGrid"
+    ></div>
+
+  </section>
+
+  <section id="restaurants">
+
+    <div class="section-head">
+
+      <div>
+        <p class="section-kicker">
+          WHAT'S ON YOUR MIND?
+        </p>
+
+        <h2>Explore Categories</h2>
+      </div>
+
+    </div>
+
+    <div class="categories">
+
+      <button
+        class="category active"
+        data-cat="All"
+        onclick="setCategory('All')"
+      >
+        <span>🍽️</span>
+        All
+      </button>
+
+      <button
+        class="category"
+        data-cat="Pizza"
+        onclick="setCategory('Pizza')"
+      >
+        <span>🍕</span>
+        Pizza
+      </button>
+
+      <button
+        class="category"
+        data-cat="Burger"
+        onclick="setCategory('Burger')"
+      >
+        <span>🍔</span>
+        Burgers
+      </button>
+
+      <button
+        class="category"
+        data-cat="Indian"
+        onclick="setCategory('Indian')"
+      >
+        <span>🍛</span>
+        Indian
+      </button>
+
+      <button
+        class="category"
+        data-cat="Biryani"
+        onclick="setCategory('Biryani')"
+      >
+        <span>🍚</span>
+        Biryani
+      </button>
+
+      <button
+        class="category"
+        data-cat="Chinese"
+        onclick="setCategory('Chinese')"
+      >
+        <span>🥡</span>
+        Chinese
+      </button>
+
+      <button
+        class="category"
+        data-cat="Dessert"
+        onclick="setCategory('Dessert')"
+      >
+        <span>🍰</span>
+        Desserts
+      </button>
+
+      <button
+        class="category"
+        data-cat="Beverage"
+        onclick="setCategory('Beverage')"
+      >
+        <span>🥤</span>
+        Drinks
+      </button>
+
+    </div>
+
+  </section>
+
+  <section class="restaurant-banner">
+
+    <div>
+
+      <span class="restaurant-badge">
+        ⭐ FEATURED RESTAURANT
+      </span>
+
+      <h2 id="featuredRestaurantName">
+        Spice Route Kitchen
+      </h2>
+
+      <p id="featuredRestaurantDetails">
+        Authentic Indian cuisine • 4.8 ⭐ • 25–30 min
+      </p>
+
+      <button
+        class="banner-btn"
+        onclick="scrollToMenu()"
+      >
+        View Menu →
+      </button>
+
+    </div>
+
+    <div class="banner-food">
+      🍛
+    </div>
+
+  </section>
+
+  <section id="menu">
+
+    <div class="menu-toolbar">
+
+      <div>
+        <p class="section-kicker">
+          TODAY'S MENU
+        </p>
+
+        <h2>Popular Dishes</h2>
+      </div>
+
+      <select
+        id="sortSelect"
+        onchange="renderMenu()"
+      >
+        <option value="default">
+          Sort: Recommended
+        </option>
+
+        <option value="low">
+          Price: Low to High
+        </option>
+
+        <option value="high">
+          Price: High to Low
+        </option>
+      </select>
+
+    </div>
+
+    <div
+      class="menu-grid"
+      id="menuGrid"
+    ></div>
+
+  </section>
+
+</section>
+
+</main>
+
+<div
+  class="overlay"
+  id="overlay"
+  onclick="toggleCart()"
+></div>
+
+<aside
+  class="cart-drawer"
+  id="cartDrawer"
+>
+
+  <div class="cart-header">
+
+    <div>
+      <span class="section-kicker">
+        YOUR ORDER
+      </span>
+
+      <h2>Cart</h2>
+    </div>
+
+    <button
+      class="close-btn"
+      onclick="toggleCart()"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <div
+    class="cart-items"
+    id="cartItems"
+  ></div>
+
+  <div
+    class="cart-empty"
+    id="cartEmpty"
+  >
+
+    <div>🛒</div>
+
+    <h3>Your cart is empty</h3>
+
+    <p>
+      Add some delicious food to get started.
+    </p>
+
+  </div>
+
+  <div
+    class="bill"
+    id="bill"
+  >
+
+    <div class="bill-row">
+      <span>Item Total</span>
+      <strong id="itemTotal">₹0</strong>
+    </div>
+
+    <div class="bill-row">
+      <span>Delivery Fee</span>
+      <strong>₹34</strong>
+    </div>
+
+    <div class="bill-row">
+      <span>Taxes & Charges</span>
+      <strong>₹0</strong>
+    </div>
+
+    <div class="bill-line"></div>
+
+    <div class="bill-row grand">
+      <span>To Pay</span>
+      <strong id="grandTotal">₹0</strong>
+    </div>
+
+    <button
+      class="checkout-btn"
+      onclick="checkout()"
+    >
+      Proceed to Checkout
+    </button>
+
+  </div>
+
+</aside>
+
+<div
+  class="modal"
+  id="checkoutModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <div>
+        <p class="section-kicker">
+          CHECKOUT
+        </p>
+
+        <h2>Complete Your Order</h2>
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeCheckout()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Delivery Address
+      </label>
+
+      <textarea
+        id="address"
+        placeholder="Enter your full delivery address"
+      ></textarea>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Phone Number
+      </label>
+
+      <input
+        id="phone"
+        type="text"
+        maxlength="10"
+        placeholder="10 digit mobile number"
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Payment Method
+      </label>
+
+      <div class="payment-options">
+
+        <button
+          class="payment active"
+          onclick="selectPayment(this)"
+        >
+          💵 Cash on Delivery
+        </button>
+
+        <button
+          class="payment"
+          onclick="selectPayment(this)"
+        >
+          📱 UPI
+        </button>
+
+        <button
+          class="payment"
+          onclick="selectPayment(this)"
+        >
+          💳 Card
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="checkout-total">
+
+      <span>Total Amount</span>
+
+      <strong id="modalTotal">
+        ₹0
+      </strong>
+
+    </div>
+
+    <button
+      class="place-order-btn"
+      onclick="placeOrder()"
+    >
+      Place Order
+    </button>
+
+  </div>
+
+</div>
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+
+      <div class="logo footer-logo">
+        🍴 Quick<span>Bite</span>
+      </div>
+
+      <p>
+        Delicious food delivered to your doorstep.
+      </p>
+
+    </div>
+
+    <div>
+
+      <h4>Quick Links</h4>
+
+      <a href="#home">Home</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#menu">Menu</a>
+
+    </div>
+
+    <div>
+
+      <h4>Support</h4>
+
+      <a href="#">Help Center</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Terms</a>
+
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 QuickBite. All rights reserved.
+  </div>
+
+</footer>
+
+<script>
+
+const places = [
+
+  {
+    id: 1,
+    name: "Spice Route Kitchen",
+    type: "Restaurant",
+    location: "RS Puram, Coimbatore",
+    rating: 4.8,
+    time: "25–30 min",
+    cuisine: "Indian, Biryani",
+    image: "🍛"
+  },
+
+  {
+    id: 2,
+    name: "The Food Factory",
+    type: "Restaurant",
+    location: "Gandhipuram, Coimbatore",
+    rating: 4.6,
+    time: "30–35 min",
+    cuisine: "Pizza, Burger, Chinese",
+    image: "🍔"
+  },
+
+  {
+    id: 3,
+    name: "Annapoorna Restaurant",
+    type: "Restaurant",
+    location: "Saibaba Colony, Coimbatore",
+    rating: 4.8,
+    time: "20–25 min",
+    cuisine: "South Indian",
+    image: "🥞"
+  },
+
+  {
+    id: 4,
+    name: "Urban Bites",
+    type: "Restaurant",
+    location: "Peelamedu, Coimbatore",
+    rating: 4.5,
+    time: "25–30 min",
+    cuisine: "Fast Food, Burger",
+    image: "🍟"
+  },
+
+  {
+    id: 5,
+    name: "Hotel Grand Palace",
+    type: "Hotel",
+    location: "Race Course, Coimbatore",
+    rating: 4.5,
+    time: "30–35 min",
+    cuisine: "Multi Cuisine",
+    image: "🏨"
+  },
+
+  {
+    id: 6,
+    name: "Hotel Blue Orchid",
+    type: "Hotel",
+    location: "Avinashi Road, Coimbatore",
+    rating: 4.4,
+    time: "35–40 min",
+    cuisine: "Indian, Chinese",
+    image: "🏨"
+  },
+
+  {
+    id: 7,
+    name: "Royal Biryani House",
+    type: "Restaurant",
+    location: "Ukkadam, Coimbatore",
+    rating: 4.7,
+    time: "20–25 min",
+    cuisine: "Biryani, Indian",
+    image: "🍚"
+  },
+
+  {
+    id: 8,
+    name: "Pizza Corner",
+    type: "Restaurant",
+    location: "Peelamedu, Coimbatore",
+    rating: 4.6,
+    time: "25–30 min",
+    cuisine: "Pizza, Italian",
+    image: "🍕"
+  },
+
+  {
+    id: 9,
+    name: "Royal Orchid Hotel",
+    type: "Hotel",
+    location: "RS Puram, Coimbatore",
+    rating: 4.6,
+    time: "30–35 min",
+    cuisine: "Indian, Continental",
+    image: "🏨"
+  },
+
+  {
+    id: 10,
+    name: "Dosa House",
+    type: "Restaurant",
+    location: "Singanallur, Coimbatore",
+    rating: 4.7,
+    time: "20–25 min",
+    cuisine: "South Indian, Dosa",
+    image: "🥞"
+  }
+
+];
+
+const menu = [
+
+  {
+    id: 1,
+    name: "Chicken Biryani",
+    desc: "Aromatic basmati rice, tender chicken, saffron & fried onions.",
+    price: 219,
+    cat: "Biryani",
+    rating: 4.8,
+    emoji: "🍗",
+    tag: "Bestseller"
+  },
+
+  {
+    id: 2,
+    name: "Paneer Butter Masala",
+    desc: "Soft paneer in a rich, creamy tomato gravy.",
+    price: 189,
+    cat: "Indian",
+    rating: 4.7,
+    emoji: "🧀",
+    tag: "Popular"
+  },
+
+  {
+    id: 3,
+    name: "Margherita Pizza",
+    desc: "Classic pizza with mozzarella, basil and signature sauce.",
+    price: 249,
+    cat: "Pizza",
+    rating: 4.6,
+    emoji: "🍕",
+    tag: ""
+  },
+
+  {
+    id: 4,
+    name: "Crispy Chicken Burger",
+    desc: "Crispy chicken, lettuce, cheese and house sauce.",
+    price: 199,
+    cat: "Burger",
+    rating: 4.8,
+    emoji: "🍔",
+    tag: "Bestseller"
+  },
+
+  {
+    id: 5,
+    name: "Veg Hakka Noodles",
+    desc: "Wok-tossed noodles with crunchy vegetables and sauces.",
+    price: 159,
+    cat: "Chinese",
+    rating: 4.5,
+    emoji: "🥡",
+    tag: ""
+  },
+
+  {
+    id: 6,
+    name: "Gulab Jamun",
+    desc: "Warm, soft milk dumplings soaked in fragrant sugar syrup.",
+    price: 89,
+    cat: "Dessert",
+    rating: 4.9,
+    emoji: "🍮",
+    tag: "Must Try"
+  },
+
+  {
+    id: 7,
+    name: "Masala Dosa",
+    desc: "Crisp dosa with spiced potato filling, sambar & chutney.",
+    price: 129,
+    cat: "Indian",
+    rating: 4.8,
+    emoji: "🥞",
+    tag: ""
+  },
+
+  {
+    id: 8,
+    name: "Mango Lassi",
+    desc: "Chilled creamy yogurt drink blended with ripe mango.",
+    price: 99,
+    cat: "Beverage",
+    rating: 4.7,
+    emoji: "🥭",
+    tag: ""
+  },
+
+  {
+    id: 9,
+    name: "Farmhouse Pizza",
+    desc: "Bell peppers, onion, corn, mushrooms and mozzarella.",
+    price: 299,
+    cat: "Pizza",
+    rating: 4.7,
+    emoji: "🍕",
+    tag: ""
+  },
+
+  {
+    id: 10,
+    name: "Classic Veg Burger",
+    desc: "Crispy veggie patty, fresh lettuce, tomato and sauce.",
+    price: 149,
+    cat: "Burger",
+    rating: 4.4,
+    emoji: "🍔",
+    tag: ""
+  }
+
+];
+
+let cart = [];
+let currentCategory = "All";
+let currentSearchFilter = "All";
+
+function money(number) {
+  return "₹" + number.toLocaleString("en-IN");
+}
+
+function globalSearch() {
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const resultsSection =
+    document.getElementById(
+      "searchResultsSection"
+    );
+
+  const grid =
+    document.getElementById("placesGrid");
+
+  const title =
+    document.getElementById(
+      "searchResultTitle"
+    );
+
+  if (search === "") {
+
+    resultsSection.style.display = "none";
+
+    renderMenu();
+
+    return;
+  }
+
+  resultsSection.style.display = "block";
+
+  let matchingPlaces =
+    places.filter(place => {
+
+      return (
+        place.name.toLowerCase().includes(search) ||
+        place.type.toLowerCase().includes(search) ||
+        place.location.toLowerCase().includes(search) ||
+        place.cuisine.toLowerCase().includes(search)
+      );
+
+    });
+
+  let matchingFood =
+    menu.filter(item => {
+
+      return (
+        item.name.toLowerCase().includes(search) ||
+        item.desc.toLowerCase().includes(search) ||
+        item.cat.toLowerCase().includes(search)
+      );
+
+    });
+
+  if (currentSearchFilter === "Restaurant") {
+
+    matchingPlaces =
+      matchingPlaces.filter(
+        place => place.type === "Restaurant"
+      );
+
+    matchingFood = [];
+
+  }
+
+  if (currentSearchFilter === "Hotel") {
+
+    matchingPlaces =
+      matchingPlaces.filter(
+        place => place.type === "Hotel"
+      );
+
+    matchingFood = [];
+
+  }
+
+  if (currentSearchFilter === "Food") {
+    matchingPlaces = [];
+  }
+
+  const totalResults =
+    matchingPlaces.length +
+    matchingFood.length;
+
+  title.innerText =
+    totalResults +
+    (
+      totalResults === 1
+        ? " result found"
+        : " results found"
+    );
+
+  if (totalResults === 0) {
+
+    grid.innerHTML = `
+      <div class="no-results">
+        <div>🔎</div>
+        <h3>No results found</h3>
+        <p>Try searching for biryani, pizza, hotels, burgers or restaurants.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  let html = "";
+
+  matchingPlaces.forEach(place => {
+
+    html += `
+      <div class="place-card">
+
+        <div class="place-image">
+          <span>${place.image}</span>
+
+          <div class="place-type">
+            ${place.type}
+          </div>
+        </div>
+
+        <div class="place-info">
+
+          <div class="place-title">
+            <h3>${place.name}</h3>
+
+            <span class="place-rating">
+              ★ ${place.rating}
+            </span>
+          </div>
+
+          <p class="place-cuisine">
+            ${place.cuisine}
+          </p>
+
+          <p class="place-location">
+            📍 ${place.location}
+          </p>
+
+          <div class="place-bottom">
+
+            <span class="delivery-time">
+              ⚡ ${place.time}
+            </span>
+
+            <button
+              class="view-menu-btn"
+              onclick="openRestaurant(${place.id})"
+            >
+              View Menu
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  matchingFood.forEach(item => {
+
+    html += `
+      <div class="place-card food-result-card">
+
+        <div class="place-image food-result-image">
+          <span>${item.emoji}</span>
+
+          <div class="place-type">
+            Food
+          </div>
+        </div>
+
+        <div class="place-info">
+
+          <div class="place-title">
+            <h3>${item.name}</h3>
+
+            <span class="place-rating">
+              ★ ${item.rating}
+            </span>
+          </div>
+
+          <p class="place-cuisine">
+            ${item.cat}
+          </p>
+
+          <p class="place-location">
+            ${item.desc}
+          </p>
+
+          <div class="place-bottom">
+
+            <strong class="food-search-price">
+              ${money(item.price)}
+            </strong>
+
+            <button
+              class="view-menu-btn"
+              onclick="addToCart(${item.id})"
+            >
+              Add
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  grid.innerHTML = html;
+}
+
+function setSearchFilter(filter) {
+
+  currentSearchFilter = filter;
+
+  document
+    .querySelectorAll(".search-filter")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.filter === filter
+      );
+
+    });
+
+  globalSearch();
+}
+
+function quickSearch(value) {
+
+  document.getElementById(
+    "searchInput"
+  ).value = value;
+
+  currentSearchFilter = "All";
+
+  document
+    .querySelectorAll(".search-filter")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.filter === "All"
+      );
+
+    });
+
+  globalSearch();
+
+  setTimeout(() => {
+
+    document
+      .getElementById(
+        "searchResultsSection"
+      )
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }, 100);
+}
+
+function clearSearch() {
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  currentSearchFilter = "All";
+
+  document
+    .querySelectorAll(".search-filter")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.filter === "All"
+      );
+
+    });
+
+  document.getElementById(
+    "searchResultsSection"
+  ).style.display = "none";
+
+  renderMenu();
+}
+
+function openRestaurant(id) {
+
+  const restaurant =
+    places.find(
+      place => place.id === id
+    );
+
+  if (!restaurant) return;
+
+  document.getElementById(
+    "featuredRestaurantName"
+  ).textContent =
+    restaurant.name;
+
+  document.getElementById(
+    "featuredRestaurantDetails"
+  ).textContent =
+    `${restaurant.cuisine} • ${restaurant.rating} ⭐ • ${restaurant.time}`;
+
+  showToast(
+    restaurant.name + " selected ✓"
+  );
+
+  scrollToMenu();
+}
+
+function setCategory(category) {
+
+  currentCategory = category;
+
+  document
+    .querySelectorAll(".category")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.cat === category
+      );
+
+    });
+
+  renderMenu();
+
+  document
+    .getElementById("menu")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+function renderMenu() {
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const sort =
+    document
+      .getElementById("sortSelect")
+      .value;
+
+  let items =
+    menu.filter(item => {
+
+      const categoryMatch =
+        currentCategory === "All" ||
+        item.cat === currentCategory;
+
+      const searchMatch =
+        search === "" ||
+        item.name.toLowerCase().includes(search) ||
+        item.desc.toLowerCase().includes(search) ||
+        item.cat.toLowerCase().includes(search);
+
+      return (
+        categoryMatch &&
+        searchMatch
+      );
+    });
+
+  if (sort === "low") {
+
+    items.sort(
+      (a, b) => a.price - b.price
+    );
+
+  }
+
+  if (sort === "high") {
+
+    items.sort(
+      (a, b) => b.price - a.price
+    );
+
+  }
+
+  const grid =
+    document.getElementById(
+      "menuGrid"
+    );
+
+  if (items.length === 0) {
+
+    grid.innerHTML = `
+      <div class="no-results">
+        <div>🔎</div>
+        <h3>No dishes found</h3>
+        <p>Try another search or category.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML =
+    items.map(item => `
+
+      <article class="food-card">
+
+        <div class="food-image">
+
+          <span class="food-emoji">
+            ${item.emoji}
+          </span>
+
+          ${
+            item.tag
+              ? `<span class="tag">${item.tag}</span>`
+              : ""
+          }
+
+          <div
+            class="veg-dot ${
+              [
+                "Chicken Biryani",
+                "Crispy Chicken Burger"
+              ].includes(item.name)
+                ? "nonveg"
+                : ""
+            }"
+          ></div>
+
+        </div>
+
+        <div class="food-info">
+
+          <div class="food-title">
+
+            <h3>
+              ${item.name}
+            </h3>
+
+            <span class="rating">
+              ★ ${item.rating}
+            </span>
+
+          </div>
+
+          <p>
+            ${item.desc}
+          </p>
+
+          <div class="food-bottom">
+
+            <strong>
+              ${money(item.price)}
+            </strong>
+
+            <button
+              class="add-btn"
+              onclick="addToCart(${item.id})"
+            >
+              ADD <span>＋</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join("");
+}
+
+function addToCart(id) {
+
+  const item =
+    menu.find(
+      product => product.id === id
+    );
+
+  if (!item) return;
+
+  const existing =
+    cart.find(
+      product => product.id === id
+    );
+
+  if (existing) {
+
+    existing.qty++;
+
+  } else {
+
+    cart.push({
+      ...item,
+      qty: 1
+    });
+
+  }
+
+  updateCart();
+
+  showToast(
+    item.name + " added to cart ✓"
+  );
+}
+
+function changeQty(id, delta) {
+
+  const item =
+    cart.find(
+      product => product.id === id
+    );
+
+  if (!item) return;
+
+  item.qty += delta;
+
+  if (item.qty <= 0) {
+
+    cart =
+      cart.filter(
+        product =>
+          product.id !== id
+      );
+
+  }
+
+  updateCart();
+}
+
+function updateCart() {
+
+  const count =
+    cart.reduce(
+      (sum, item) =>
+        sum + item.qty,
+      0
+    );
+
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+        item.qty,
+      0
+    );
+
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
+
+  document.getElementById(
+    "itemTotal"
+  ).textContent =
+    money(total);
+
+  document.getElementById(
+    "grandTotal"
+  ).textContent =
+    money(total + 34);
+
+  document.getElementById(
+    "modalTotal"
+  ).textContent =
+    money(total + 34);
+
+  document.getElementById(
+    "cartEmpty"
+  ).style.display =
+    cart.length
+      ? "none"
+      : "block";
+
+  document.getElementById(
+    "bill"
+  ).style.display =
+    cart.length
+      ? "block"
+      : "none";
+
+  document.getElementById(
+    "cartItems"
+  ).innerHTML =
+
+    cart.map(item => `
+
+      <div class="cart-item">
+
+        <div class="mini-food">
+          ${item.emoji}
+        </div>
+
+        <div class="cart-item-info">
+
+          <strong>
+            ${item.name}
+          </strong>
+
+          <span>
+            ${money(item.price)}
+          </span>
+
+        </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQty(${item.id},-1)"
+          >
+            −
+          </button>
+
+          <b>
+            ${item.qty}
+          </b>
+
+          <button
+            onclick="changeQty(${item.id},1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+}
+
+function toggleCart() {
+
+  document
+    .getElementById("cartDrawer")
+    .classList.toggle("open");
+
+  document
+    .getElementById("overlay")
+    .classList.toggle("show");
+}
+
+function checkout() {
+
+  if (!cart.length) {
+
+    showToast(
+      "Your cart is empty."
+    );
+
+    return;
+  }
+
+  document
+    .getElementById("checkoutModal")
+    .classList.add("show");
+}
+
+function closeCheckout() {
+
+  document
+    .getElementById("checkoutModal")
+    .classList.remove("show");
+}
+
+function selectPayment(button) {
+
+  document
+    .querySelectorAll(".payment")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+  button.classList.add(
+    "active"
+  );
+}
+
+function placeOrder() {
+
+  const address =
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+  const phone =
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+  if (
+    !address ||
+    phone.length !== 10 ||
+    !/^\d+$/.test(phone)
+  ) {
+
+    showToast(
+      "Please enter a valid address and 10-digit phone number."
+    );
+
+    return;
+  }
+
+  closeCheckout();
+
+  cart = [];
+
+  updateCart();
+
+  if (
+    document
+      .getElementById("cartDrawer")
+      .classList.contains("open")
+  ) {
+
+    toggleCart();
+
+  }
+
+  showToast(
+    "🎉 Order placed! Your food is on the way."
+  );
+}
+
+function scrollToMenu() {
+
+  document
+    .getElementById("menu")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+let toastTimer;
+
+function showToast(message) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    }, 2800);
+}
+
+renderMenu();
+updateCart();
+
+</script>
+
+</body>
+</html>
